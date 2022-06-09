@@ -11,6 +11,7 @@
 	<link rel="shortcut icon" href="/media/kota-malang.png">
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/bootstrap/css/bootstrap.min.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/custom/style2.css') }}">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
 </head>
 <body>
 	<style>
@@ -28,68 +29,35 @@
     </div>
     <div id="intro-video-container">
         <div class="caption">
-            <a href="" class="logo"><img src="/media/logo.png" style="width: 60%;" alt=""></a>
+            <a href="" class="logo"><img src="{{asset('assets/image/logo.png')}}" style="width: 60%;" alt=""></a>
             <br/><br/><br/><br/>
 			<ul class="6131 cpanel colorfull" >																	
 				<li>
 					<div class="cpanel-item">
-						<a href="{{ url('/profil') }}" class="icon">
-							<img src="/media/icon/icon1.png" alt="">
+						<a href="{{ url('/profil') }}" class='icon'>
+							<i class="bi bi-person-fill" style="font-size: 100px; color:#fff"></i>
 						</a>
+						<i class="	"></i>
 						<div class="title">PROFIL</div>
 					</div>
 				</li>
 				<li>
 					<div class="cpanel-item">
-						<a href="{{ url('/virtual-tour') }}" class="icon">
-							<img src="/media/icon/icon2.png" alt="">
+						<a href="{{ url('/virtual-tour') }}" class='icon'>
+							<i class="bi bi-person-fill" style="font-size: 80px;"></i>
 						</a>
 						<div class="title">VIRTUAL TOUR</div>
 					</div>
 				</li>
 				<li>
 					<div class="cpanel-item">
-						<a href="https://jurnalpangripta.malangkota.go.id/index.php/PANGRIPTA" target="_blank" class="icon">
-							<img src="/media/icon/icon3.png" alt="">
+						<a href="" target="_blank" class='icon'>
+							<i class="bi bi-person-fill" style="font-size: 80px;"></i>
 						</a>
-						<div class="title">E-JOURNAL</div>
-					</div>
-				</li>
-				<li>
-					<div class="cpanel-item">
-						<a href="https://sambat.malangkota.go.id/" target="_blank" class="icon">
-							<img src="/media/icon/icon4.png" alt="">
-						</a>
-						<div class="title">SAMBAT ONLINE</div>
+						<div class="title">GALERI</div>
 					</div>
 				</li>
 			</ul>
-			<ul class="571 cpanel colorfull" >
-				<li>
-					<div class="cpanel-item">
-						<a href="https://si-petarungv2.malangkota.go.id/" target="_blank" class="icon">
-							<img src="/media/icon/icon8.png" alt="">
-						</a>
-						<div class="title">SI-PETARUNG</div>
-					</div>
-				</li>
-				<li>
-					<div class="cpanel-item">
-						<a href="http://bappeda.malangkota.go.id/web/layanan-publik/kek/profil-kek/" target="_blank" class="icon">
-							<img src="/media/icon/icon6.png" alt="">
-						</a>
-						<div class="title">KEK</div>
-					</div>
-				</li>
-				<li>
-					<div class="cpanel-item">
-						<a href="#" target="_blank" class="icon">
-							<img src="/media/icon/icon7.png" alt="">
-						</a>
-						<div class="title">FORUM CSR</div>
-					</div>
-				</li>
-			</ul>	
 			<div class="clearfix"></div>
 			<br/><br/>
 			<a href="/web" class="enter-btn">MASUK KE WEBSITE <i class="fa fa-long-arrow-right"></i></a>

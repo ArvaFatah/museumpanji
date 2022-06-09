@@ -270,7 +270,8 @@ a:hover{
 	height: 125px;
 	display: block;
 }
-.cpanel-item .icon img{
+.cpanel-item .icon img,
+.cpanel-item .icon i{
 	height: 145px;
 	width: auto;
 	position: absolute;

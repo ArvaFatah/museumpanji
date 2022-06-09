@@ -55,8 +55,8 @@
   */
 
   const pannoImage = document.querySelector('.pano-image');
-  const img = "{{ asset('assets/textures/view-example.jpg') }}";
-  const img2 = 'https://pchen66.github.io/Panolens/examples/asset/textures/equirectangular/sunset.jpg';
+  const img = "{{ asset('assets/textures/Depan.jpg') }}";
+  const img2 = 'https://pchen66.github.io/Panolens/examples/asset/textures/equirectangular/Depan.jpg';
 
   const panorama = new PANOLENS.ImagePanorama(img);
   const panorama2 = new PANOLENS.ImagePanorama(img2);
