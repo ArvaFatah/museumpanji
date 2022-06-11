@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,12 +15,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
 Route::get('/virtual-tour', function () {
     return view('virtual-tour');
 });
 Route::get('/profil', function () {
     return view('profil');
 });
+
+
+Route::get('/login', [AuthController::class, 'showFormLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+
+Route::get('/',function () {
+    return view('home');
+})->name('home');
+Route::get('/landing',function () {
+    return view('landing');
+})->name('landing');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
