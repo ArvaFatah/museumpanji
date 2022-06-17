@@ -1,13 +1,13 @@
 @extends('layouts.adminlte3.base')
 
-@section('title', 'Tambah Pemesanan Kendaraan')
+@section('title', 'Tambah Gallery')
 
-@section('content-title', 'Tambah Pemesanan Kendaraan')
+@section('content-title', 'Tambah Gallery')
 
 @section('breadcrumb')
 <ol class="breadcrumb float-sm-right">
-  <li class="breadcrumb-item"><a href="{{ Route('index.drivers') }}">Bookings Vehicle</a></li>
-  <li class="breadcrumb-item active">New</li>
+  <li class="breadcrumb-item"><a href="{{ Route('admin-gallery') }}">Gallery</a></li>
+  <li class="breadcrumb-item active">Tambah</li>
 </ol>
 @endsection
 
@@ -26,28 +26,8 @@
       @csrf
         <div class="card-body">
           <div class="form-group">
-            <label for="vehicle">Kendaraan <span class="text-danger">*</span></label>
-            <select id="vehicle" name="vehicle" class="select2bs4" data-placeholder="Pilih kendaraan" style="width: 100%;">
-              @foreach($vehicles as $vehicle)
-              <option value="{{ $vehicle->id }}">{{ $vehicle->name }}</option>
-              @endforeach
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="driver">Pengendara <span class="text-danger">*</span></label>
-            <select id="driver" name="driver" class="select2bs4" data-placeholder="Select a State" style="width: 100%;">
-              @foreach($drivers as $driver)
-              <option value="{{ $driver->id }}">{{ $driver->name }}</option>
-              @endforeach
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="approver">Penyetuju</label>
-            <select id="approver" name="approver[]" class="select2bs4" multiple="multiple" data-placeholder="Select a State" style="width: 100%;">
-              @foreach($approvers as $approver)
-              <option value="{{ $approver->id }}">{{ $approver->name }}</option>
-              @endforeach
-            </select>
+            <label for="vehicle">Judul <span class="text-danger">*</span></label>
+            <input class="form-control" id="judul" name="judul"/>
           </div>
         </div>
         <!-- /.card-body -->

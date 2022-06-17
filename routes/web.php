@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GalleryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,4 +35,12 @@ Route::get('/',function () {
 Route::get('/landing',function () {
     return view('landing');
 })->name('landing');
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/portal',function () {
+    return view('portal');
+})->name('portal');
+Route::get('/gallery',function () {
+    return view('gallery');
+})->name('gallery');
+Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/admin/gallery', [GalleryController::class, 'index'])->name('admin-gallery');
+Route::get('/admin/gallery/add', [GalleryController::class, 'addpage'])->name('admin-gallery-add');

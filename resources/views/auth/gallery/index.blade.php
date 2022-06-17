@@ -4,7 +4,7 @@ $user = Auth::user();
 
 @extends('layouts.adminlte3.base')
 
-@section('title', 'Pemesanan Kendaraan')
+@section('title', 'Gallery')
 
 @section('head-link')
 <!-- DataTables -->
@@ -15,11 +15,11 @@ $user = Auth::user();
 <link rel="stylesheet" href="{{ asset('assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
 @endsection
 
-@section('content-title', 'Pemesanan Kendaraan')
+@section('content-title', 'Gallery')
 
 @section('breadcrumb')
 <ol class="breadcrumb float-sm-right">
-  <li class="breadcrumb-item"><a href="{{ Route('index.bookings') }}">Booking Vehicles</a></li>
+  <li class="breadcrumb-item"><a href="{{ Route('dashboard') }}">Gallery</a></li>
 </ol>
 @endsection
 
@@ -30,9 +30,7 @@ $user = Auth::user();
     <div class="card">
       <div class="card-header">
         <h3 class="card-title">List</h3>
-        @if($user->role == 0)
-          <a class="btn btn-primary btn-sm float-right" href="{{ url('master/bookings/new') }}"><i class="fa fa-plus"></i> Add New</a>
-        @endif
+        <a class="btn btn-primary btn-sm float-right" href="{{ url('admin/gallery/add') }}"><i class="fa fa-plus"></i> Add New</a>
       </div>
       <!-- /.card-header -->
       <div class="card-body">
@@ -40,49 +38,13 @@ $user = Auth::user();
           <thead>
             <tr>
               <th width="1%">No</th>
-              <th>Kendaraan</th>
-              <th>Pengendara</th>
-              <th>Status</th>
-              @if($user->role == 1)
+              <th>Gambar</th>
+              <th>Judul</th>
+              <th>Deskripsi</th>
               <th>Aksi</th>
-              @endif
             </tr>
           </thead>
           <tbody>
-            @foreach($bookings as $booking)
-            <tr role="button" onClick="showDetailModal(this)" data-booking="{{ $booking }}">
-              <td>{{ $loop->iteration }}</td>
-              <td>{{ $booking->name_vehicle }}</td>
-              <td>{{ $booking->name_driver }}</td>
-              <td>
-                @if($booking->status == 0)
-                <span class="badge badge-secondary">Menunggu</span>
-                @elseif($booking->status == 1)
-                <span class="badge badge-success">Disetujui</span>
-                @elseif($booking->status == 2)
-                <span class="badge badge-danger">Ditolak</span>
-                @endif
-              </td>
-              @if($user->role == 1)
-              <td>
-                @foreach($booking->approval as $approval)
-                  @if($approval->id_approver == $user->id)
-                    @if($approval->status == 0)
-                      Menunggu
-                    @elseif($approval->status == 1)
-                      <a href="{{ url('master/bookings/approve/'.$approval->id) }}" role="button" class="btn btn-primary btn-sm">Setujui</a>
-                      <a href="{{ url('master/bookings/reject/'.$approval->id) }}" role="button" class="btn btn-danger btn-sm">Tolak</a>
-                    @elseif($approval->status == 2)
-                    <span class="badge badge-success">Disetujui</span>
-                    @elseif($approval->status == 3)
-                    <span class="badge badge-danger">Ditolak</span>
-                    @endif
-                  @endif
-                @endforeach
-              </td>
-              @endif
-            </tr>
-            @endforeach
           </tbody>
         </table>
       </div>
@@ -120,7 +82,6 @@ $user = Auth::user();
               <td>
                 <table class="table table-borderless m-0">
                     <tbody id="booking_history">
-                      
                     </tbody>
                   </table>
               </td>
@@ -208,3 +169,4 @@ $user = Auth::user();
 
 </script>
 @endsection
+     
