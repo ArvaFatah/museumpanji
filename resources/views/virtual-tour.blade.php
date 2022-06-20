@@ -62,7 +62,7 @@
   var progressElement = document.getElementById( 'progress' );
   $(() => {
     const img = "{{ asset('assets/textures/Depan.jpg') }}";
-    const img2 = "{{ asset('assets/textures/view2.jpg') }}";
+    const img2 = "{{ asset('assets/textures/img2.jpg') }}";
 
     const panorama = new PANOLENS.ImagePanorama(img);
     const panorama2 = new PANOLENS.ImagePanorama(img2);

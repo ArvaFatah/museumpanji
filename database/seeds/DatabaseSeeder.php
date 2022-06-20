@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-        $user = 'admin1,admin1@gmail.com#admin2,admin2@gmail.com#admin3,admin3@gmail.com';
+        $user = 'user,user@gmail.com#admin2,admin2@gmail.com#admin3,admin3@gmail.com';
 
         $faker = Faker::create();
 

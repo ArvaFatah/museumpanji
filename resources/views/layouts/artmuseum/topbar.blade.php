@@ -6,7 +6,7 @@
       </div>
       <nav id="nav-menu-container">
         <ul class="nav-menu">
-          <li class="menu-active"><a href="{{url('landing')}}">Home</a></li>
+          <li class="menu-active"><a href="{{url('')}}">Home</a></li>
           <li><a href="{{url('profil')}}">Profil</a></li>
           <li><a href="{{url('gallery')}}">Gallery</a></li>
           <li><a href="{{url('virtual-tour')}}">Virtual Tour</a></li>
