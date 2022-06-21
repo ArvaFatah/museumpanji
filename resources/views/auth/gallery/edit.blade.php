@@ -1,13 +1,13 @@
 @extends('layouts.adminlte3.base')
 
-@section('title', 'Tambah Gallery')
+@section('title', 'Edit Gallery')
 
-@section('content-title', 'Tambah Gallery')
+@section('content-title', 'Edit Gallery')
 
 @section('breadcrumb')
 <ol class="breadcrumb float-sm-right">
   <li class="breadcrumb-item"><a href="{{ Route('admin.gallery') }}">Gallery</a></li>
-  <li class="breadcrumb-item active">Tambah</li>
+  <li class="breadcrumb-item active">Edit</li>
 </ol>
 @endsection
 
@@ -22,19 +22,19 @@
       </div>
       <!-- /.card-header -->
       <!-- form start -->
-      <form action="{{ url('admin/gallery/add') }}" method="post" enctype="multipart/form-data">
+      <form action="{{ url('admin/gallery/edit/'.$gallery->id) }}" method="post" enctype="multipart/form-data">
       @csrf
         <div class="card-body">
           <div class="form-group">
             <label for="vehicle">Judul <span class="text-danger">*</span></label>
-            <input class="form-control" id="judul" name="judul"/>
+            <input class="form-control" id="judul" name="judul" value="{{$gallery->judul}}"/>
           </div>
           <div class="form-group">
             <label for="vehicle">Keterangan</label>
-            <textarea class="form-control" id="keterangan" name="keterangan"></textarea>
+            <textarea class="form-control" id="keterangan" name="keterangan">{{$gallery->keterangan}}</textarea>
           </div>
           <div class="form-group">
-            <label for="vehicle">Foto <span class="text-danger">*</span></label>
+            <label for="vehicle">Foto</label>
             <input type="file" class="form-control" id="foto" name="foto" accept="jpeg,jpg,png"/>
           </div>
         </div>

@@ -45,6 +45,19 @@ $user = Auth::user();
             </tr>
           </thead>
           <tbody>
+            @foreach ($galleries as $gallery)
+            <tr>
+              <td>{{$loop->iteration}}</td>
+              <td><img src="{{$gallery->foto}}" alt="{{$gallery->judul}}" class="img-thumbnail" width="100" height="100"></td>
+              <td>{{$gallery->judul}}</td>
+              <td>{{$gallery->keterangan}}</td>
+              <td>
+                <a href="{{ url('admin/gallery/edit/'.$gallery->id) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
+                <button class="btn btn-default btn-sm" onClick="showDetailModal(this)" data-gallery="{{ $gallery }}"><i class="fa fa-eye"></i></button>&nbsp;&nbsp;
+                <a href="{{ url('admin/gallery/delete/'.$gallery->id) }}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+              </td>
+            </tr>  
+            @endforeach
           </tbody>
         </table>
       </div>
@@ -58,7 +71,7 @@ $user = Auth::user();
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Detail Pemesanan Kendaraan</h4>
+        <h4 class="modal-title">Detail Gallery</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -67,29 +80,21 @@ $user = Auth::user();
         <table class="table table-borderless">
           <tbody>
             <tr>
-              <th width="30%">Kendaraan</th>
+              <th width="30%">Judul</th>
               <td width="1%">:</td>
-              <td id="booking_name_vehicle"></td>
+              <td id="gallery_judul"></td>
             </tr>
             <tr>
-              <th width="30%">Pengemudi</th>
+              <th width="30%">Keterangan</th>
               <td width="1%">:</td>
-              <td id="booking_name_driver"></td>
+              <td id="gallery_keterangan"></td>
             </tr>
             <tr>
-              <th width="30%">Riwayat Persetujuan</th>
+              <th width="30%">Foto</th>
               <td width="1%">:</td>
               <td>
-                <table class="table table-borderless m-0">
-                    <tbody id="booking_history">
-                    </tbody>
-                  </table>
+                <img id="gallery_foto" src="" alt="" class="img-thumbnail" width="100" height="100">
               </td>
-            </tr>
-            <tr>
-              <th>Status</th>
-              <td width="1%">:</td>
-              <td id="status"></td>
             </tr>
             <tr>
               <td id="booking_action"></td>
@@ -123,46 +128,12 @@ $user = Auth::user();
   });
 
   function showDetailModal(elem){
-    var booking = $(elem).data("booking");
-    console.log(booking);
+    var item = $(elem).data("gallery");
+    console.log(item);
     
-    $("#modal #booking_name_vehicle").html(booking.name_vehicle);
-    $("#modal #booking_name_driver").html(booking.name_driver);
-    var approval = booking.approval;
-    var history = approval.map((item, index) => {
-      var status = "";
-      if(item.status == 0){
-        status = 'Menunggu';
-      }
-      if(item.status == 1){
-        status = 'Terkirim';
-      }
-      if(item.status == 2){
-        status = 'Disetujui';
-      }
-      if(item.status == 3){
-        status = 'Ditolak';
-      }
-      
-      return `<tr>'
-        <td width="30%" class="pl-0 py-0">${item.name_approver}</td>
-        <td width="1%" class="py-0 pl-0">:</td>
-        <td class="py-0 pl-1">
-          ${status}
-        </td>
-      </tr>`;
-    });
-
-    $("#modal #booking_history").html(history);
-    var status = ""
-    if(booking.status == 0){
-      status = "Menunggu"
-    }else if(booking.status == 1){
-      status = "Disetujui"
-    }else if(booking.status == 2){
-      status = "Ditolak"
-    }
-    $("#modal #status").html(status);
+    $("#modal #gallery_judul").html(item.judul);
+    $("#modal #gallery_keterangan").html(item.keterangan);
+    $("#modal #gallery_foto").attr('src', item.foto);
 
     $("#modal").modal('show');
   }

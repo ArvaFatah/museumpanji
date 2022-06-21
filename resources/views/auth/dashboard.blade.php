@@ -17,9 +17,9 @@
     <!-- small box -->
     <div class="small-box bg-info">
       <div class="inner">
-        <h3>0</h3>
+        <h3>{{$totalgallery}}</h3>
 
-        <p>Pengemudi</p>
+        <p>Gallery</p>
       </div>
       <div class="icon">
         <i class="ion ion-bag"></i>
@@ -31,9 +31,9 @@
     <!-- small box -->
     <div class="small-box bg-success">
       <div class="inner">
-        <h3>0</h3>
+        <h3>{{$totalvirtual}}</h3>
 
-        <p>Kendaraan</p>
+        <p>Virtual Tour</p>
       </div>
       <div class="icon">
         <i class="ion ion-stats-bars"></i>
@@ -41,13 +41,13 @@
     </div>
   </div>
   <!-- ./col -->
-  <div class="col-lg-3 col-6">
+  <div class="col-lg-6 col-6">
     <!-- small box -->
     <div class="small-box bg-warning">
       <div class="inner">
-        <h3>0</h3>
+        <h3>{{$totaluser}}</h3>
 
-        <p>Penyetuju</p>
+        <p>User</p>
       </div>
       <div class="icon">
         <i class="ion ion-person-add"></i>
@@ -55,24 +55,10 @@
     </div>
   </div>
   <!-- ./col -->
-  <div class="col-lg-3 col-6">
-    <!-- small box -->
-    <div class="small-box bg-danger">
-      <div class="inner">
-        <h3>0</h3>
-
-        <p>Kendaraan Dipinjam</p>
-      </div>
-      <div class="icon">
-        <i class="ion ion-pie-graph"></i>
-      </div>
-    </div>
-  </div>
-  <!-- ./col -->
 </div>
 <!-- /.row -->
 
-<div class="row">
+<!-- <div class="row">
   <div class="col-lg-12">
     <div class="card">
       <div class="card-header">
@@ -80,20 +66,18 @@
           <i class="fas fa-chart-pie mr-1"></i>
           Chart
         </h3>
-      </div><!-- /.card-header -->
+      </div>
       <div class="card-body">
         <div class="tab-content p-0">
-          <!-- Morris chart - Sales -->
           <div class="chart tab-pane active" id="revenue-chart"
                 style="position: relative; height: 300px;">
             <canvas id="revenue-chart-canvas" data-chart="" height="300" style="height: 300px;"></canvas>
           </div>
         </div>
-      </div><!-- /.card-body -->
+      </div>
     </div>
-    <!-- /.card -->
   </div>
-</div>
+</div> -->
 @endsection
 
 @section('script')
