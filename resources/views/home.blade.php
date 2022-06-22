@@ -57,7 +57,7 @@
 				</li>
 				<li>
 					<div class="cpanel-item">
-						<a href="{{ url('/galery') }}" class="icon">
+						<a href="{{ url('/gallery') }}" class="icon">
 							<img src="{{asset('assets/image/galery.png')}}" alt="">
 						</a>
 						<div class="title">GALERY</div>

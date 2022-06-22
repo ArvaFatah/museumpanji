@@ -41,6 +41,10 @@ Route::get('/portal',function () {
 Route::get('/gallery',function () {
     return view('gallery');
 })->name('gallery');
+Route::get('/profil',function () {
+    return view('profil');
+})->name('profil');
+
 
 
 Route::group([
