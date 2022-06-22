@@ -38,9 +38,7 @@ Route::get('/landing',function () {
 Route::get('/portal',function () {
     return view('portal');
 })->name('portal');
-Route::get('/gallery',function () {
-    return view('gallery');
-})->name('gallery');
+Route::get('/gallery', [GalleryController::class, 'portalPage'])->name('gallery');
 
 
 Route::group([
