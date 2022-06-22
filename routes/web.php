@@ -38,13 +38,10 @@ Route::get('/landing',function () {
 Route::get('/portal',function () {
     return view('portal');
 })->name('portal');
-Route::get('/gallery',function () {
-    return view('gallery');
-})->name('gallery');
-Route::get('/profil',function () {
-    return view('profil');
-})->name('profil');
-
+Route::get('/beranda',function () {
+    return view('beranda');
+})->name('beranda');
+Route::get('/gallery', [GalleryController::class, 'portalPage'])->name('gallery');
 
 
 Route::group([

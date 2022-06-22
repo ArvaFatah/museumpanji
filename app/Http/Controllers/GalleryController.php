@@ -14,6 +14,13 @@ class GalleryController extends Controller
         ]);
     }
 
+    public function portalPage(){
+        $galleries = Gallery::where('status', '1')->get();
+        return view('gallery', [
+            'galleries' => $galleries,
+        ]);
+    }
+
     public function addPage(){
         return view('auth/gallery/new');
     }
