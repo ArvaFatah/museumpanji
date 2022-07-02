@@ -14,7 +14,7 @@ class VirtualTourController extends Controller
         foreach($virtuals as $key => $val){
             $detail = VirtualTourDetail::where('virtual_tour_id_from', $val['id'])
             ->select('virtual_tour_details.*', 'virtual_tours.judul')
-            ->leftJoin('virtual_tours', 'virtual_tour_id_from', '=', 'virtual_tours.id')
+            ->leftJoin('virtual_tours', 'virtual_tour_id_to', '=', 'virtual_tours.id')
             ->get();
             $virtuals[$key]['detail'] = $detail;   
         }
@@ -30,11 +30,13 @@ class VirtualTourController extends Controller
         foreach($virtuals as $key => $val){
             $detail = VirtualTourDetail::where('virtual_tour_id_from', $val['id'])
             ->select('virtual_tour_details.*', 'virtual_tours.judul','virtual_tours.keterangan',
-            'virtual_tours.foto')
-            ->leftJoin('virtual_tours', 'virtual_tour_id_from', '=', 'virtual_tours.id')
+            'virtual_tours.foto', 'virtual_tours.id as vid')
+            ->leftJoin('virtual_tours', 'virtual_tour_id_to', '=', 'virtual_tours.id')
             ->get();
             $virtuals[$key]['detail'] = $detail;   
         }
+
+        // dd($virtuals);
 
         return view('virtual-tour', [
             'virtuals' => $virtuals,
