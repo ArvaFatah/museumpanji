@@ -44,7 +44,10 @@ class VirtualTourController extends Controller
     }
 
     public function addPage(){
-        return view('auth/virtual/new');
+        $virtuals = VirtualTour::where('status', '1')->get();
+        return view('auth/virtual/new', [
+            'virtuals' => $virtuals,
+        ]);
     }
 
     public function store(Request $request){
@@ -77,6 +80,19 @@ class VirtualTourController extends Controller
         $virtual->foto = '/storage/'.$path;
         $virtual->status = 1;
         $save = $virtual->save();
+        $vid = $virtual->id;
+        if($request->tujuan){
+            foreach($request->tujuan as $tkey => $tval){
+                $virtualdet = new VirtualTourDetail;
+                $virtualdet->virtual_tour_id_from = $vid;
+                $virtualdet->virtual_tour_id_to = $tval;
+                $virtualdet->x_axis = $request->x[$tkey];
+                $virtualdet->y_axis = $request->y[$tkey];
+                $virtualdet->z_axis = $request->z[$tkey];
+                $virtualdet->status = 1;
+                $detsave = $virtualdet->save();
+            }
+        }
 
         if($save){
             return redirect()->route('admin.virtual')->with('success', 'Berhasil menambahkan virtual tour: '.$request->judul);
@@ -87,8 +103,12 @@ class VirtualTourController extends Controller
 
     public function pageEdit($id){
         $virtual = VirtualTour::find($id);
+        $virtuals = VirtualTour::where('status', '1')->get();
+        $virtualdet = VirtualTourDetail::where('virtual_tour_id_from', $id)->get();
         return view('auth.virtual.edit', [
-            'virtual' => $virtual
+            'virtual' => $virtual,
+            'virtuals' => $virtuals,
+            'virtualdet' => $virtualdet,
         ]);
     }
 
@@ -122,6 +142,21 @@ class VirtualTourController extends Controller
             $virtual->judul = $request->judul;
             $virtual->keterangan = $request->keterangan;
             $virtual->save();
+            $vid = $virtual->id;
+            $delvtdet = VirtualTourDetail::where('virtual_tour_id_from', $vid)->delete(); 
+            if($request->tujuan){
+                foreach($request->tujuan as $tkey => $tval){
+                    $virtualdet = new VirtualTourDetail;
+                    $virtualdet->virtual_tour_id_from = $vid;
+                    $virtualdet->virtual_tour_id_to = $tval;
+                    $virtualdet->x_axis = $request->x[$tkey];
+                    $virtualdet->y_axis = $request->y[$tkey];
+                    $virtualdet->z_axis = $request->z[$tkey];
+                    $virtualdet->status = 1;
+                    $detsave = $virtualdet->save();
+                }
+            }
+
             return redirect()->route('admin.virtual')->with('success', 'Berhasil menubah data virtual tour '.$request->judul);
         }else{
             return redirect()->route('admin.virtual')->with('error', 'Tidak menemukan data virtual tour');

@@ -54,7 +54,6 @@ $user = Auth::user();
               <td>{{$virtual->keterangan}}</td>
               <td>
                 <a href="{{ url('admin/virtual/edit/'.$virtual->id) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
-                <button class="btn btn-default btn-sm" onClick="showLinkModal(this)" data-gallery="{{ $virtual }}"><i class="fa fa-plus"></i></button>&nbsp;&nbsp;
                 <button class="btn btn-default btn-sm" onClick="showDetailModal(this)" data-gallery="{{ $virtual }}"><i class="fa fa-eye"></i></button>&nbsp;&nbsp;
                 <a href="{{ url('admin/virtual/delete/'.$virtual->id) }}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
               </td>
@@ -98,90 +97,18 @@ $user = Auth::user();
                 <img id="gallery_foto" src="" alt="" class="img-thumbnail" width="100" height="100">
               </td>
             </tr>
-            <tr>
-              <td colspan="3">
-              <table class="table table-bordered" id="modal_detail">
-                <thead>
-                  <tr>
-                    <th>Tujuan</th>
-                    <th>X Axis</th>
-                    <th>Y Axis</th>
-                    <th>Z Axis</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                </tbody>
-              </table>
-              </td>
-            </tr>
-            <tr>
-              <td id="booking_action"></td>
-            </tr>
           </tbody>
         </table>
-      </div>
-    </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
-</div>
-<!-- /.modal --> 
-
-<div class="modal fade" id="modal-link">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Link Virtual Tour</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <form action="{{ url('admin/virtual/adddetailmodal') }}" method="post" enctype="multipart/form-data">
-      @csrf
-      <div class="modal-body">
-        <table class="table table-borderless">
+        <table class="table table-bordered" id="modal_detail">
+          <thead>
+            <tr>
+              <th>Tujuan</th>
+            </tr>
+          </thead>
           <tbody>
-            <tr>
-              <th width="30%">Judul</th>
-              <td width="1%">:</td>
-              <td id="gallery_judul"></td>
-            </tr>
-            <tr>
-              <th width="30%">Keterangan</th>
-              <td width="1%">:</td>
-              <td id="gallery_keterangan"></td>
-            </tr>
           </tbody>
         </table>
-        <div class="form-group">
-          <label for="modal_vt_id_to">Tujuan <span class="text-danger">*</span></label>
-          <input type="hidden" id="modal_vt_id_from" name="modal_vt_id_from"/>
-          <select class="form-control" id="modal_vt_id_to" name="modal_vt_id_to" placeholder="Pilih tujuan">
-          @foreach ($virtuals as $virtual)
-          <option value="{{ $virtual->id }}">{{ $virtual->judul }}</option>
-          @endforeach
-          </select>
-        </div>
-        <div class="row">
-          <div class="form-group col-lg-4 col-sm-12">
-            <label for="modal_x_axis">X Axis <span class="text-danger">*</span></label>
-            <input class="form-control" id="modal_x_axis" name="modal_x_axis"/>
-          </div>
-          <div class="form-group col-lg-4 col-sm-12">
-            <label for="modal_y_axis">Y Axis <span class="text-danger">*</span></label>
-            <input class="form-control" id="modal_y_axis" name="modal_y_axis"/>
-          </div>
-          <div class="form-group col-lg-4 col-sm-12">
-            <label for="modal_z_axis">Z Axis <span class="text-danger">*</span></label>
-            <input class="form-control" id="modal_z_axis" name="modal_z_axis"/>
-          </div>
-        </div>
       </div>
-      <div class="modal-footer">
-        <button class="btn btn-primary">Simpan</button>
-      </div>
-      </form>
     </div>
     <!-- /.modal-content -->
   </div>
@@ -219,26 +146,10 @@ $user = Auth::user();
       console.log(item)
       $("#modal #modal_detail tbody").append(`<tr>
         <td>${item.judul}</td>
-        <td>${item.x_axis}</td>
-        <td>${item.y_axis}</td>
-        <td>${item.z_axis}</td>
-        <td><a href="{{ url('admin/virtual/deletedetailmodal/${item.id}') }}" role="button" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
       </tr>`)
     })
 
     $("#modal").modal('show');
-  }
-
-  function showLinkModal(elem){
-    var item = $(elem).data("gallery");
-    console.log(item);
-    
-    $("#modal-link #gallery_judul").html(item.judul);
-    $("#modal-link #gallery_keterangan").html(item.keterangan);
-    $("#modal-link #gallery_foto").attr('src', item.foto);
-    $("#modal-link #modal_vt_id_from").val(item.id);
-
-    $("#modal-link").modal('show');
   }
 
 </script>

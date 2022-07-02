@@ -45,7 +45,7 @@
   <!-- Start Virtual Tour -->
   <section id="virtual">
     <div class="pano-image">
-      <div id="typed"></class>
+      <div id="typed"></div>
     </div>
   </section>
   <!-- End Virtual Tour -->
@@ -61,6 +61,12 @@
 // /*
   var progressElement = document.getElementById( 'progress' );
   $(() => {
+    const viewer = new PANOLENS.Viewer({
+      container: pannoImage,
+      output: 'console',
+      initialLookAt: new THREE.Vector3( 0, 0, 5000 )
+    });
+
     const arr = @json($virtuals);
     // console.log(arr);
     let pano = [];
@@ -80,15 +86,18 @@
         if(typeof pano['vt_'+ditem.vid] == 'undefined'){
           pano['vt_'+ditem.vid] = panorama2;
         }
-        pano['vt_'+item.id].link( pano['vt_'+ditem.vid], new THREE.Vector3( ditem.x_axis, ditem.y_axis, ditem.z_axis ) );
+        let angle = new THREE.Vector3(parseInt(ditem.x_axis), parseInt(ditem.y_axis), parseInt(ditem.z_axis) );
+        pano['vt_'+item.id].link( pano['vt_'+ditem.vid], angle, 600);
+        if(dindex == 0){
+          pano['vt_'+item.id].addEventListener( 'enter-fade-start', function(){
+            viewer.tweenControlCenter( angle, 12000 );
+          } );
+        }
       })
     });
+
+    // viewer.camera.position.set(position.x, position.y, position.z);
     
-    const viewer = new PANOLENS.Viewer({
-      container: pannoImage,
-      output: 'console',
-      initialLookAt: new THREE.Vector3( 0, 0, 5000 )
-    });
     for(var key in pano){
       viewer.add(pano[key]);
     }
