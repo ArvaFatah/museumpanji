@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\UserManageController;
 use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\VirtualTourController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +19,7 @@ use App\Http\Controllers\ProfilController;
 |
 */
 
-Route::get('/virtual-tour', function () {
-    return view('virtual-tour');
-});
+Route::get('/virtual-tour', [VirtualTourController::class, 'portalPage']);
 Route::get('/profil', function () {
     return view('profil');
 });
@@ -75,12 +74,14 @@ Route::group([
     Route::get('/admin/gallery/delete/{id}', [GalleryController::class, 'delete'])->name('admin.gallery.delete');
     
     // Virtual Tour
-    Route::get('/admin/virtual', [GalleryController::class, 'index'])->name('admin.virtual');
-    Route::get('/admin/virtual/add', [GalleryController::class, 'addpage'])->name('admin.virtual.add');
-    Route::post('/admin/virtual/add', [GalleryController::class, 'store'])->name('admin.virtual.store');
-    Route::get('/admin/virtual/edit/{id}', [GalleryController::class, 'pageEdit'])->name('admin.virtual.edit');
-    Route::post('/admin/virtual/edit/{id}', [GalleryController::class, 'postEdit'])->name('admin.virtual.postedit');
-    Route::get('/admin/virtual/delete/{id}', [GalleryController::class, 'delete'])->name('admin.virtual.delete');
+    Route::get('/admin/virtual', [VirtualTourController::class, 'index'])->name('admin.virtual');
+    Route::get('/admin/virtual/add', [VirtualTourController::class, 'addpage'])->name('admin.virtual.add');
+    Route::post('/admin/virtual/add', [VirtualTourController::class, 'store'])->name('admin.virtual.store');
+    Route::post('/admin/virtual/adddetailmodal', [VirtualTourController::class, 'storedetailmodal'])->name('admin.virtual.storedetailmodal');
+    Route::get('/admin/virtual/edit/{id}', [VirtualTourController::class, 'pageEdit'])->name('admin.virtual.edit');
+    Route::post('/admin/virtual/edit/{id}', [VirtualTourController::class, 'postEdit'])->name('admin.virtual.postedit');
+    Route::get('/admin/virtual/delete/{id}', [VirtualTourController::class, 'delete'])->name('admin.virtual.delete');
+    Route::get('/admin/virtual/deletedetailmodal/{id}', [VirtualTourController::class, 'deletedetailmodal'])->name('admin.virtual.deletedetailmodal');
     
     // Gallery
     Route::get('/admin/user', [UserManageController::class, 'index'])->name('admin.user');
