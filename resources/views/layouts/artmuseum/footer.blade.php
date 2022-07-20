@@ -4,6 +4,7 @@
 <!-- End blog Area -->
 <!-- start footer Area -->		
 <footer class="footer-area section-gap">
+  <script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="7ee80d6c-96c1-468f-ba5b-2020cc6e1a49";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
   <div class="container">
     <div class="row">
       <div class="col-lg-5 col-md-6 col-sm-6">
@@ -14,7 +15,7 @@
           </p>
           <p class="footer-text">
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> and distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> Museum Panji | The Cultural Hero. All rights reserved <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">AzryanArva</a> and distributed by <a href="https://themewagon.com" target="_blank">Polinema</a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
           </p>
         </div>
@@ -41,10 +42,10 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
           <h6>Follow Us</h6>
           <p>Let us be social</p>
           <div class="footer-social d-flex align-items-center">
-            <a href="#"><i class="fa fa-facebook"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-dribbble"></i></a>
-            <a href="#"><i class="fa fa-behance"></i></a>
+            <a href="https://api.whatsapp.com/send?phone=6285646709151&text=Hai,%20Saya%20Mau%20Reservasi." target="_blank"><i class="fa fa-whatsapp"></i></a>
+            <a href="https://www.facebook.com/pages/Museum-Panji/1279705622119045?__tn__=%3C" target="_blank"><i class="fa fa-facebook"></i></a>
+            <a href="https://www.instagram.com/museumpanji_id/?hl=id" target="_blank"><i class="fa fa-instagram"></i></a>
+            <a href="https://www.youtube.com/channel/UCoBob2mZQ6sTDCY-eqYcg6g" target="_blank"><i class="fa fa-youtube"></i></a>
           </div>
         </div>
       </div>							

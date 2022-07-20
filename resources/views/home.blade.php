@@ -60,7 +60,7 @@
 						<a href="{{ url('/gallery') }}" class="icon">
 							<img src="{{asset('assets/image/galery.png')}}" alt="">
 						</a>
-						<div class="title">GALERY</div>
+						<div class="title">GALLERY</div>
 					</div> 
 				</li>
 				<li>
@@ -68,7 +68,7 @@
 						<a href="{{ url('/profil') }}" class="icon">
 							<img src="{{asset('assets/image/sejarah.png')}}" alt="">
 						</a>
-						<div class="title">SEJARAH</div>
+						<div class="title">HUBUNGI KAMI</div>
 					</div> 
 				</li>		
 				<ul class="571 cpanel colorfull" >
@@ -82,7 +82,7 @@
 				</li>																
 				<li>
 					<div class="cpanel-item">
-						<a href="{{ url('/info') }}" target="_blank" class="icon">
+						<a href="{{ url('/info') }}" class="icon">
 							<img src="{{asset('assets/image/info.png')}}" alt="">
 						</a>
 						<div class="title">TENTANG KAMI</div>

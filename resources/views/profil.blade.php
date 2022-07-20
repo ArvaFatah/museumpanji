@@ -21,15 +21,16 @@
 <section class="contact-page-area section-gap">
   <div class="container">
     <div class="row">
-      <div class="map-wrap" style="width:100%; height: 445px;" id="map"></div>
+      <p><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d74994.64617297018!2d112.70453592685142!3d-8.007408289707849!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd625f0dff4cf7d%3A0xed13708f1ee76253!2sMuseum%20Panji!5e0!3m2!1sen!2sid!4v1650876889237!5m2!1sen!2sid" width="400%" height="450" style="border:0;" allowfullscreen frameborder="0"></iframe></p>
+      <div style="width:100%; height: 300px;" ></div>
       <div class="col-lg-4 d-flex flex-column address-wrap">
         <div class="single-contact-address d-flex flex-row">
           <div class="icon">
             <span class="lnr lnr-home"></span>
           </div>
           <div class="contact-details">
-            <h5>Dhaka, Bangladesh</h5>
-            <p>56/8, West Panthapath</p>
+            <h5>Museum Panji</h5>
+            <p>Jl. Ringin Anom Desa Slamet Kecamatan Tumpang</p>
           </div>
         </div>
         <div class="single-contact-address d-flex flex-row">
@@ -37,8 +38,8 @@
             <span class="lnr lnr-phone-handset"></span>
           </div>
           <div class="contact-details">
-            <h5>00 (880) 9865 562</h5>
-            <p>Mon to Fri 9am to 6 pm</p>
+            <h5>(0341) 789678, 087759746733</h5>
+            <p> Contact Person : Dwi Cahyono</p>
           </div>
         </div>
         <div class="single-contact-address d-flex flex-row">
@@ -46,8 +47,8 @@
             <span class="lnr lnr-envelope"></span>
           </div>
           <div class="contact-details">
-            <h5>support@codethemes.com</h5>
-            <p>Send us your query anytime!</p>
+            <h5>museumpanji@gmail.com</h5>
+            <p>www.museumpanji.com</p>
           </div>
         </div>														
       </div>

@@ -79,9 +79,9 @@
             <img src="{{asset('assets/image/logo.png')}}" width="450" alt="" title="" />
             <div class="row mt-5 justify-content-center">
               <div class="col-lg-4 justify-content-center">
-                <a href="{{url('profil')}}" class="btn btn-outline-primary rounded-0 text-uppercase w-100 py-5">
+                <a href="{{url('beranda')}}" class="btn btn-outline-primary rounded-0 text-uppercase w-100 py-5">
                   <span class="lnr lnr-rocket" style="font-size: 36px;"></span>
-                  <h4 class="mt-4">Profil</h4>
+                  <h4 class="mt-4">Beranda</h4>
                 </a>						
               </div>
               <div class="col-lg-4 justify-content-center">

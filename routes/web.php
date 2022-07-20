@@ -40,6 +40,18 @@ Route::get('/portal',function () {
 })->name('portal');
 Route::get('/beranda',function () {
     return view('beranda');
+})->name('portal');
+Route::get('/info',function () {
+    return view('info');
+})->name('portal');
+Route::get('/sejarah',function () {
+    return view('sejarah');
+})->name('portal');
+Route::get('/organisasi',function () {
+    return view('organisasi');
+})->name('portal');
+Route::get('/visi',function () {
+    return view('visi');
 })->name('beranda');
 Route::get('/gallery', [GalleryController::class, 'portalPage'])->name('gallery');
 
