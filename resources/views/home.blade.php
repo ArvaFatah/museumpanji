@@ -9,8 +9,8 @@
 	<meta name="Keywords" content="MUSEUM PANJI">
 	<script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="7ee80d6c-96c1-468f-ba5b-2020cc6e1a49";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
 	
-	<link rel="shortcut icon" href="/media/logo.png">
-	<link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/bootstrap/css/bootstrap.min.css') }}">
+	<link rel="shortcut icon" href="{{asset('assets/image/logo.png')}}">
+	<!-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/bootstrap/css/bootstrap.min.css') }}"> -->
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/custom/style2.css') }}">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
 </head>
@@ -40,7 +40,7 @@
 
 	</style>
     <div class="preloader">
-        <div class="loader"><img src="/media/preloader.png" alt=""></div>
+        <div class="loader"><img src="{{asset('assets/image/logo.png')}}" alt="" width="150"></div>
     </div>
     <div id="intro-video-container">
         <div class="caption">
@@ -93,7 +93,7 @@
 			<br/><br/>
 				<a href="{{ url('/virtual-tour') }}" class="enter-btn">MASUK KE VIRTUAL TOUR <i class="fa fa-long-arrow-right"></i></a>
 		</div>
-			<video id="intro-video" background-size="cover" playsinline autoplay muted loop poster="/media/background.jpg">
+			<video id="intro-video" background-size="cover" playsinline autoplay muted loop poster="{{asset('assets/image/parkir.jpg')}}">
 				<source src="{{ asset('assets/videos/video.mp4') }}" type="video/mp4">
 			</video>
 		</div>
