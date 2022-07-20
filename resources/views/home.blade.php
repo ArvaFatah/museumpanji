@@ -40,7 +40,7 @@
 
 	</style>
     <div class="preloader">
-        <div class="loader"><img src="{{asset('assets/image/logo.png')}}" alt="" width="150"></div>
+        <div class="loader"><img src="{{asset('assets/image/logo.png')}}" alt="" width="120"></div>
     </div>
     <div id="intro-video-container">
         <div class="caption">
