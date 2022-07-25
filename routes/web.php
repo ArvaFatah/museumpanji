@@ -40,9 +40,7 @@ Route::get('/portal',function () {
 Route::get('/beranda',function () {
     return view('beranda');
 })->name('portal');
-Route::get('/info',function () {
-    return view('info');
-})->name('portal');
+Route::get('/info',[ProfilController::class, 'portalPage'])->name('portal');
 Route::get('/sejarah',function () {
     return view('sejarah');
 })->name('portal');

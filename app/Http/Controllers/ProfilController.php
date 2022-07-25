@@ -20,6 +20,19 @@ class ProfilController extends Controller
         ]);
     }
 
+    public function portalPage(){
+        $profil = Profil::first();
+        if(empty($profil)){
+            $profil = (object) [
+                'judul' => '',
+                'deskripsi' => ''
+            ];
+        }
+        return view('info', [
+            'profil' => $profil,
+        ]);
+    }
+
     public function store(Request $request){
         $rules = [
             'judul' => 'required',

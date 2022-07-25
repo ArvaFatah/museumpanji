@@ -123,19 +123,9 @@
 						</div>
 						<div class="col-lg-6 col-md-12 no-padding info-rigth">
 							<div class="info-content">
-								<h2 class="pb-30">Welcome to <br>
-								Museum Panji<br>
-								</h2>
+								<h2 class="pb-30">{{ $profil->judul }}</h2>
 								<p>
-									Museum Panji adalah sebuah museum yang terletak di Jalan Raya Bangilan, Ringin Anom, Desa Slamet, Kecamatan Tumpang, Kota Malang, Provinsi Jawa Timur, Indonesia. Fungsi khusus dari Museum Panji adalah untuk menjelaskan tentang sebuah legenda yaitu cerita Panji. 									
-								</p>
-								<br>
-								<p>
-									Sebagian besar koleksi museum berupa topeng malangan yang berasal dari masyarakat Kota Malang. Pembangunan museum ini dimulai sejak tahun 2014. Museum diresmikan pada tahun 2016. Pendiri dan pengelolanya adalah Yayasan Inggil Malang. Museum Panji juga mengoleksi beberapa jenis wayang dan prasasti serta foto-foto Kota Malang tempo dulu. Letak titik koordinatnya di 8°00’10.1” Lintang Selatan dan 112°43’48.3” Bujur Timur.									
-								</p>
-								<br>
-								<p>
-									Akses ke museum dapat dari beberapa rute yaitu dari Bandar Udara Abdurrahman Saleh (12,4 kilometer), Stasiun Malang (12,6 kilometer), Terminal Arjosari (15,9 kilometer), Terminal Gadang (16 kilometer), atau alun-alun Kota Malang (13,5 kilometer).
+								{{ $profil->deskripsi }}
 								</p>
 								</div>
 						</div>
