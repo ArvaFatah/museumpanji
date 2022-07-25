@@ -124,7 +124,7 @@
 						<div class="col-lg-6 col-md-12 no-padding info-rigth">
 							<div class="info-content">
 								<h2 class="pb-30">{{ $profil->judul }}</h2>
-								<p>
+								<p style="white-space: pre-line;">
 								{{ $profil->deskripsi }}
 								</p>
 								</div>
