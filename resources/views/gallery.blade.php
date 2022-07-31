@@ -32,7 +32,7 @@
       </div>						
       <div id="grid-container" class="row">
         @foreach($galleries as $gallery)
-          <a class="single-gallery" href="{{ asset($gallery->foto) }}"><img class="grid-item" src="{{ asset($gallery->foto) }}"></a>
+          <a class="single-gallery" href="{{ asset($gallery->foto) }}" title="{{$gallery->judul}}" data-contents="{{$gallery->judul}}<br><small>{{$gallery->keterangan}}</small>"><img class="grid-item" src="{{ asset($gallery->foto) }}"></a>
         @endforeach
       </div>	
     </div>	
