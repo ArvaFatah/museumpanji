@@ -21,6 +21,13 @@ class GalleryController extends Controller
         ]);
     }
 
+    public function portalDetailPage($id){
+        $gallery = Gallery::find($id);
+        return view('gallery-detail', [
+            'gallery' => $gallery,
+        ]);
+    }
+
     public function addPage(){
         return view('auth/gallery/new');
     }

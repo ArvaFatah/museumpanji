@@ -30,11 +30,16 @@
           </div>
         </div>
       </div>						
-      <div id="grid-container" class="row">
+      <div class="card-columns">
         @foreach($galleries as $gallery)
-          <a class="single-gallery" href="{{ asset($gallery->foto) }}" title="{{$gallery->judul}}" data-contents="{{$gallery->judul}}<br><small>{{$gallery->keterangan}}</small>"><img class="grid-item" src="{{ asset($gallery->foto) }}"></a>
+          <a href="{{ url('gallery/detail/'.$gallery->id) }}" class="card" style="width: 18rem;cursor:pointer;">
+            <img src="{{ asset($gallery->foto) }}" class="card-img-top" alt="{{$gallery->judul}}">
+            <div class="card-body">
+              <h5 class="card-title">{{$gallery->judul}}</h5>
+            </div>
+          </a>
         @endforeach
-      </div>	
+      </div>
     </div>	
   </section>
   <!-- End gallery Area -->	

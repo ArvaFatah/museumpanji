@@ -51,6 +51,7 @@ Route::get('/visi',function () {
     return view('visi');
 })->name('beranda');
 Route::get('/gallery', [GalleryController::class, 'portalPage'])->name('gallery');
+Route::get('/gallery/detail/{id}', [GalleryController::class, 'portalDetailPage'])->name('gallery-detail');
 
 
 Route::group([
