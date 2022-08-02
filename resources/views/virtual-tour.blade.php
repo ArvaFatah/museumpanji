@@ -43,7 +43,7 @@
   
   <div class="position-fixed mt-3 ml-3">
     <div class="d-flex flex-row">
-      <div class="card mr-2" style="width: 18rem;">
+      <div class="card mr-2" id="area-menu" style="width: 18rem;">
         <div class="card-body">
           <div class="d-flex justify-content-between">
             <h5 class="card-title">Area Menu</h5>
@@ -56,7 +56,7 @@
         </div>
       </div>
       <div>
-        <button type="button" class="btn btn-light btn-lg" aria-label="Close">
+        <button type="button" class="btn btn-light btn-lg" id="close-area-menu" aria-label="Close" data-isshow="Y">
           <span aria-hidden="true"><i class="fa fa-close"></i></span>
         </button>
       </div>
@@ -82,6 +82,19 @@
     var listItem = document.querySelector( '.list-group-item' );
     var progressElement = document.getElementById( 'progress' );
     $(() => {
+      $('#close-area-menu').click((event) => {
+        var isshow = $('#close-area-menu').data('isshow');
+        if(isshow == 'Y'){
+          $('#close-area-menu').data('isshow', 'N');
+          $('#area-menu').attr('style', 'width: 18rem;display: none;');
+          $('#close-area-menu span .fa').removeClass('fa-close').addClass('fa-bars')
+        }else{
+          $('#close-area-menu').data('isshow', 'Y');
+          $('#area-menu').attr('style', 'width: 18rem;');
+          $('#close-area-menu span .fa').removeClass('fa-bars').addClass('fa-close')
+        }
+      })
+
       const viewer = new PANOLENS.Viewer({
         container: pannoImage,
         output: 'console',
