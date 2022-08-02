@@ -75,34 +75,74 @@
                 Isikan tujuan titik point.
               </small>
               </label>
-              <div class="list-link table-responsive">
-                <table class="table table-bordered" id="list-link-tbl">
-                  <thead>
-                    <tr>
-                      <th>Tujuan</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    @foreach($virtualdet as $virdet)
-                    <tr data-xyz="{{ $virdet->x_axis . '_' . $virdet->y_axis . '_' . $virdet->z_axis }}">
-                      <td>
-                        <select class="form-control" name="tujuan[]">
-                        @foreach($virtuals as $vir)
-                        @if($virdet->virtual_tour_id_to == $vir->id)
-                        <option value="{{$vir->id}}" selected>{{$vir->judul}}</option>
-                        @else
-                          <option value="{{$vir->id}}">{{$vir->judul}}</option>
-                        @endif
+              <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active" id="tujuan-tab" data-toggle="tab" data-target="#tujuan" type="button" role="tab" aria-controls="tujuan" aria-selected="true">Tujuan</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="infospot-tab" data-toggle="tab" data-target="#infospot" type="button" role="tab" aria-controls="infospot" aria-selected="false">Infospot</button>
+                </li>
+              </ul>
+              <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="tujuan" role="tabpanel" aria-labelledby="tujuan-tab">
+                  <div class="list-link table-responsive mt-2">
+                    <table class="table table-bordered" id="list-link-tbl">
+                      <tbody>
+                        @foreach($virtualdet as $virdet)
+                        <tr data-xyz="{{ $virdet->x_axis . '_' . $virdet->y_axis . '_' . $virdet->z_axis }}">
+                          <td>
+                            <select class="form-control" name="tujuan[]">
+                            @foreach($virtuals as $vir)
+                            @if($virdet->virtual_tour_id_to == $vir->id)
+                            <option value="{{$vir->id}}" selected>{{$vir->judul}}</option>
+                            @else
+                              <option value="{{$vir->id}}">{{$vir->judul}}</option>
+                            @endif
+                            @endforeach
+                            </select>
+                            <input type="hidden" name="x[]" value="{{$virdet->x_axis}}"/>
+                            <input type="hidden" name="y[]" value="{{$virdet->y_axis}}"/>
+                            <input type="hidden" name="z[]" value="{{$virdet->z_axis}}"/>
+                          </td>
+                        </tr>
                         @endforeach
-                        </select>
-                        <input type="hidden" name="x[]" value="{{$virdet->x_axis}}"/>
-                        <input type="hidden" name="y[]" value="{{$virdet->y_axis}}"/>
-                        <input type="hidden" name="z[]" value="{{$virdet->z_axis}}"/>
-                      </td>
-                    </tr>
-                    @endforeach
-                  </tbody>
-                </table>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="infospot" role="tabpanel" aria-labelledby="infospot-tab">
+                  <div class="list-link-infospot table-responsive mt-2">
+                    <table class="table table-bordered" id="list-link-tbl-infospot">
+                      <tbody>
+                        @foreach($virtualinfo as $virinfo)
+                        <tr data-xyz="{{ $virinfo->x_axis . '_' . $virinfo->y_axis . '_' . $virinfo->z_axis }}">
+                          <td>
+                            <div class="form-group">
+                              <label for="judul">Judul</label>
+                              <input type="text" class="form-control" id="judul" aria-describedby="title" name="ijudul[]" value="{{$virinfo->judul}}">
+                            </div>
+                            <div class="form-group">
+                              <label for="keterangan">Keterangan</label>
+                              <textarea class="form-control" id="keterangan" aria-describedby="description" name="iketerangan[]" value="{{$virinfo->keterangan}}"></textarea>
+                            </div>
+                            <div class="from-group">
+                              <label for="customFile">Foto</label>
+                              <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="customFile" name="ifoto[]" accept="jpeg,jpg,png"/>
+                                <label class="custom-file-label" for="customFile">Choose file</label>
+                              </div>
+                            </div>
+                            <input type="hidden" name="iid[]" value="{{$virinfo->id}}"/>
+                            <input type="hidden" name="ix[]" value="{{$virinfo->x_axis}}"/>
+                            <input type="hidden" name="iy[]" value="{{$virinfo->y_axis}}"/>
+                            <input type="hidden" name="iz[]" value="{{$virinfo->z_axis}}"/>
+                          </td>
+                        </tr>
+                        @endforeach
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -141,6 +181,8 @@
   const arr = @json($virtuals);
   const virtualObj = @json($virtual);
   const virtualdet = @json($virtualdet);
+  const virtualinfo = @json($virtualinfo);
+  var target = '#tujuan';
 
   $(function() {
     //Initialize Select2 Elements
@@ -160,6 +202,11 @@
       $(this).append($element);
       $(this).trigger("change");
     });
+
+    target = $('#myTab .nav-item .nav-link.active').data('target');
+    $('#myTab .nav-item .nav-link').click((event) => {
+      target = $(event.target).data('target');
+    })
 
     viewer = new PANOLENS.Viewer({
       container: pannoImage,
@@ -203,8 +250,24 @@
         infospot_.addEventListener( "click", function(){
           let { x, y, z } = infospot_.position;
           panorama.remove(infospot_);
-          console.log(x +'_'+ y + '_' + z);
+          // console.log(x +'_'+ y + '_' + z);
           $(`#list-link-tbl tbody tr[data-xyz="${x +'_'+ y + '_' + z}"]`).remove();
+        } );
+      })
+    }
+
+    if(virtualinfo){
+      virtualinfo.forEach((item, index) => {
+        let infospot_ = new PANOLENS.Infospot(600, PANOLENS.DataImage.Info);
+        infospot_.position.set( item.x_axis, item.y_axis, item.z_axis );
+        let { x, y, z} = infospot_.position;
+        panorama.add(infospot_);
+
+        infospot_.addEventListener( "click", function(){
+          let { x, y, z } = infospot_.position;
+          panorama.remove(infospot_);
+          // console.log(x +'_'+ y + '_' + z);
+          $(`#list-link-tbl-infospot tbody tr[data-xyz="${x +'_'+ y + '_' + z}"]`).remove();
         } );
       })
     }
@@ -213,29 +276,62 @@
       if (e.intersects.length > 0) return;
       const a = viewer.raycaster.intersectObject(viewer.panorama, true)[0].point;
       // console.log('click panorama\n', e, 'point\n', a);
-      let _infospot = new PANOLENS.Infospot(600, PANOLENS.DataImage.Arrow);
+      var icon = PANOLENS.DataImage.Arrow;
+      if(target == '#infospot'){
+        icon = PANOLENS.DataImage.Icon;
+      }
+      let _infospot = new PANOLENS.Infospot(600, icon);
       _infospot.position.set( -a.x, a.y, a.z );
       let { x, y, z} = _infospot.position;
       viewer.panorama.add(_infospot);
-      $('#list-link-tbl tbody').append(`
-        <tr data-xyz="${x +'_'+ y + '_' + z}">
-          <td>
-            <select class="form-control" name="tujuan[]">
-            ${arr.map((item, index) => (
-              `<option value="${item.id}">${item.judul}</option>`
-            ))}
-            </select>
-            <input type="hidden" name="x[]" value="${x}"/>
-            <input type="hidden" name="y[]" value="${y}"/>
-            <input type="hidden" name="z[]" value="${z}"/>
-          </td>
-        </tr>
-      `);
+      if(target == '#infospot'){
+        $('#list-link-tbl-infospot tbody').append(`
+          <tr data-xyz="${x +'_'+ y + '_' + z}">
+            <td>
+              <div class="form-group">
+                <label for="judul">Judul</label>
+                <input type="text" class="form-control" id="judul" aria-describedby="title" name="ijudul[]">
+              </div>
+              <div class="form-group">
+                <label for="keterangan">Keterangan</label>
+                <textarea class="form-control" id="keterangan" aria-describedby="description" name="iketerangan[]"></textarea>
+              </div>
+              <div class="from-group">
+                <label for="customFile">Foto</label>
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="customFile" name="ifoto[]" accept="jpeg,jpg,png"/>
+                  <label class="custom-file-label" for="customFile">Choose file</label>
+                </div>
+              </div>
+              <input type="hidden" name="iid[]" value=""/>
+              <input type="hidden" name="ix[]" value="${x}"/>
+              <input type="hidden" name="iy[]" value="${y}"/>
+              <input type="hidden" name="iz[]" value="${z}"/>
+            </td>
+          </tr>
+        `)
+      }else{
+        $('#list-link-tbl tbody').append(`
+          <tr data-xyz="${x +'_'+ y + '_' + z}">
+            <td>
+              <select class="form-control" name="tujuan[]">
+              ${arr.map((item, index) => (
+                `<option value="${item.id}">${item.judul}</option>`
+              ))}
+              </select>
+              <input type="hidden" name="x[]" value="${x}"/>
+              <input type="hidden" name="y[]" value="${y}"/>
+              <input type="hidden" name="z[]" value="${z}"/>
+            </td>
+          </tr>
+        `);
+      }
       viewer.panorama.toggleInfospotVisibility(false, 100);
       _infospot.addEventListener( "click", function(){
         let { x, y, z } = _infospot.position;
         viewer.panorama.remove(_infospot);
-        console.log(x +'_'+ y + '_' + z);
+        // console.log(x +'_'+ y + '_' + z);
+        $(`#list-link-tbl-infospot tbody tr[data-xyz="${x +'_'+ y + '_' + z}"]`).remove();
         $(`#list-link-tbl tbody tr[data-xyz="${x +'_'+ y + '_' + z}"]`).remove();
       } );
     });

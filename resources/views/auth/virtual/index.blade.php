@@ -108,6 +108,15 @@ $user = Auth::user();
           <tbody>
           </tbody>
         </table>
+        <table class="table table-bordered" id="modal_infospot">
+          <thead>
+            <tr>
+              <th>Info Spot</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -142,9 +151,14 @@ $user = Auth::user();
     $("#modal #gallery_keterangan").html(item.keterangan);
     $("#modal #gallery_foto").attr('src', item.foto);
     $("#modal #modal_detail tbody").html('');
+    $("#modal #modal_infospot tbody").html('');
     item.detail.forEach((item, index) => {
-      console.log(item)
       $("#modal #modal_detail tbody").append(`<tr>
+        <td>${item.judul}</td>
+      </tr>`)
+    })
+    item.infospot.forEach((item, index) => {
+      $("#modal #modal_infospot tbody").append(`<tr>
         <td>${item.judul}</td>
       </tr>`)
     })

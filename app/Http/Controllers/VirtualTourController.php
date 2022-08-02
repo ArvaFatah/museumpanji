@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\VirtualTour;
 use App\Models\VirtualTourDetail;
+use App\Models\VirtualTourInfospot;
 
 class VirtualTourController extends Controller
 {
@@ -17,6 +18,9 @@ class VirtualTourController extends Controller
             ->leftJoin('virtual_tours', 'virtual_tour_id_to', '=', 'virtual_tours.id')
             ->get();
             $virtuals[$key]['detail'] = $detail;   
+
+            $infospot = VirtualTourInfospot::where('virtual_tour_id_from', $val['id'])->where('status', 1)->get();
+            $virtuals[$key]['infospot'] = $infospot;
         }
 
         return view('auth/virtual/index', [
@@ -33,7 +37,10 @@ class VirtualTourController extends Controller
             'virtual_tours.foto', 'virtual_tours.id as vid')
             ->leftJoin('virtual_tours', 'virtual_tour_id_to', '=', 'virtual_tours.id')
             ->get();
-            $virtuals[$key]['detail'] = $detail;   
+            $virtuals[$key]['detail'] = $detail;
+            
+            $infospot = VirtualTourInfospot::where('virtual_tour_id_from', $val['id'])->where('status', 1)->get();
+            $virtuals[$key]['infospot'] = $infospot;
         }
 
         // dd($virtuals);
@@ -94,6 +101,29 @@ class VirtualTourController extends Controller
             }
         }
 
+        if($request->ijudul){
+            foreach($request->ijudul as $ikey => $ival){
+                
+                $virtualinfo = new VirtualTourInfospot;
+                if ($request->file('ifoto')[$ikey]) {
+                    $imagePath = $request->file('ifoto')[$ikey];
+                    $extension = $imagePath->getClientOriginalExtension();
+                    $imageName = time().'.'.$extension;
+                    $path = $request->file('ifoto')[$ikey]->storeAs('virtual-info', $imageName, 'public');
+
+                    $virtualinfo->foto = '/storage/'.$path;
+                }
+                $virtualinfo->virtual_tour_id_from = $vid;
+                $virtualinfo->judul = $request->ijudul[$ikey];
+                $virtualinfo->keterangan = $request->iketerangan[$ikey];
+                $virtualinfo->x_axis = $request->ix[$ikey];
+                $virtualinfo->y_axis = $request->iy[$ikey];
+                $virtualinfo->z_axis = $request->iz[$ikey];
+                $virtualinfo->status = 1;
+                $infosave = $virtualinfo->save();
+            }
+        }
+
         if($save){
             return redirect()->route('admin.virtual')->with('success', 'Berhasil menambahkan virtual tour: '.$request->judul);
         }else{
@@ -105,23 +135,25 @@ class VirtualTourController extends Controller
         $virtual = VirtualTour::find($id);
         $virtuals = VirtualTour::where('status', '1')->get();
         $virtualdet = VirtualTourDetail::where('virtual_tour_id_from', $id)->get();
+        $virtualinfo = VirtualTourInfospot::where('virtual_tour_id_from', $id)->where('status', 1)->get();
         return view('auth.virtual.edit', [
             'virtual' => $virtual,
             'virtuals' => $virtuals,
             'virtualdet' => $virtualdet,
+            'virtualinfo' => $virtualinfo,
         ]);
     }
 
     public function postEdit(Request $request, $id){
         $rules = [
             'judul' => 'required|',
-            'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:10240',
         ];
         $messages = [
             'judul.required' => 'Judul wajib diisi',
             'foto.image' => 'Foto harus gambar',
             'foto.mimes' => 'Foto harus bertipe: jpeg,png,jpg,gif,svg',
-            'foto.max' => 'Foto maksimal 2mb',
+            'foto.max' => 'Foto maksimal 10mb',
         ];
 
         $request->validate($rules, $messages);
@@ -154,6 +186,33 @@ class VirtualTourController extends Controller
                     $virtualdet->z_axis = $request->z[$tkey];
                     $virtualdet->status = 1;
                     $detsave = $virtualdet->save();
+                }
+            }
+
+            if($request->ijudul){
+                $softdelvtinfo = VirtualTourInfospot::where('virtual_tour_id_from', $vid)->update(['status' => 0]); 
+                foreach($request->ijudul as $ikey => $ival){
+                    if($request->iid[$ikey]){
+                        $virtualinfo = VirtualTourInfospot::find($request->iid[$ikey]);
+                    }else{
+                        $virtualinfo = new VirtualTourInfospot;
+                    }
+                    if (isset($request->file('ifoto')[$ikey])) {
+                        $imagePath = $request->file('ifoto')[$ikey];
+                        $extension = $imagePath->getClientOriginalExtension();
+                        $imageName = time().'.'.$extension;
+                        $path = $request->file('ifoto')[$ikey]->storeAs('virtual-info', $imageName, 'public');
+
+                        $virtualinfo->foto = '/storage/'.$path;
+                    }
+                    $virtualinfo->virtual_tour_id_from = $vid;
+                    $virtualinfo->judul = $request->ijudul[$ikey];
+                    $virtualinfo->keterangan = $request->iketerangan[$ikey];
+                    $virtualinfo->x_axis = $request->ix[$ikey];
+                    $virtualinfo->y_axis = $request->iy[$ikey];
+                    $virtualinfo->z_axis = $request->iz[$ikey];
+                    $virtualinfo->status = 1;
+                    $infosave = $virtualinfo->save();
                 }
             }
 

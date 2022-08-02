@@ -63,6 +63,25 @@
     </div>
   </div>
 
+  <div id="desc-container" style="display:none">
+  @foreach($virtuals as $key => $val)
+      @if(isset($val['infospot']))
+        @foreach($val['infospot'] as $ikey => $ival)
+          <div id="iitem-{{$ival->id}}">
+            <div class="card mb-3" style="width: 28rem;">
+              <img src="{{$ival->foto}}" class="card-img-top" alt="{{$ival->judul}}">
+              <div class="card-body">
+                <h5 class="card-title">{{$ival->judul}}</h5>
+                <p class="card-text">{{$ival->keterangan}}</p>
+                <p class="card-text"><small class="text-muted">{{$ival->created_at}}</small></p>
+              </div>
+            </div>
+          </div>
+        @endforeach
+      @endif
+  @endforeach
+  </div>
+
   <!-- Start Virtual Tour -->
   <div class="pano-image">
     <div id="typed"></div>
@@ -115,7 +134,6 @@
         list.appendChild( itemlist );
         $('.vt-item-'+index).data('id', item.id);
 
-        
         const img = "{{ asset('') }}" + '/' + item.foto ;
         const panorama = new PANOLENS.ImagePanorama(img);
         panorama.addEventListener( 'progress', onProgress );
@@ -141,6 +159,15 @@
               viewer.tweenControlCenter( angle, 12000 );
             } );
           }
+        })
+
+        item.infospot.forEach((iitem, iindex) => {
+          var infospot = new PANOLENS.Infospot( 600, PANOLENS.DataImage.Icon );
+          infospot.name = iitem.judul;
+          infospot.setText = iitem.judul;
+          infospot.addHoverElement(document.getElementById( `iitem-${iitem.id}` ), 200 );
+          infospot.position.set(iitem.x_axis, iitem.y_axis, iitem.z_axis);
+          pano['vt_'+item.id].add(infospot);
         })
       });
 

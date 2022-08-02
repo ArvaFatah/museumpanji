@@ -75,16 +75,31 @@
                 Isikan tujuan titik point.
               </small>
               </label>
-              <div class="list-link table-responsive">
-                <table class="table table-bordered" id="list-link-tbl">
-                  <thead>
-                    <tr>
-                      <th>Tujuan</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                  </tbody>
-                </table>
+              <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active" id="tujuan-tab" data-toggle="tab" data-target="#tujuan" type="button" role="tab" aria-controls="tujuan" aria-selected="true">Tujuan</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="infospot-tab" data-toggle="tab" data-target="#infospot" type="button" role="tab" aria-controls="infospot" aria-selected="false">Infospot</button>
+                </li>
+              </ul>
+              <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="tujuan" role="tabpanel" aria-labelledby="tujuan-tab">
+                  <div class="list-link table-responsive">
+                    <table class="table table-bordered" id="list-link-tbl">
+                      <tbody>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="infospot" role="tabpanel" aria-labelledby="infospot-tab">
+                  <div class="list-link-infospot table-responsive">
+                    <table class="table table-bordered" id="list-link-tbl-infospot">
+                      <tbody>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -121,6 +136,7 @@
   var progressElement = document.getElementById( 'progress' );
   let viewer, lastpanorama;
   const arr = @json($virtuals);
+  var target = '#tujuan';
 
   $(function() {
     //Initialize Select2 Elements
@@ -140,6 +156,11 @@
       $(this).append($element);
       $(this).trigger("change");
     });
+
+    target = $('#myTab .nav-item .nav-link.active').data('target');
+    $('#myTab .nav-item .nav-link').click((event) => {
+      target = $(event.target).data('target');
+    })
 
     viewer = new PANOLENS.Viewer({
       container: pannoImage,
@@ -167,29 +188,61 @@
             if (e.intersects.length > 0) return;
             const a = viewer.raycaster.intersectObject(viewer.panorama, true)[0].point;
             // console.log('click panorama\n', e, 'point\n', a);
-            let _infospot = new PANOLENS.Infospot(600, PANOLENS.DataImage.Arrow);
+            var icon = PANOLENS.DataImage.Arrow;
+            if(target == '#infospot'){
+              icon = PANOLENS.DataImage.Icon;
+            }
+            let _infospot = new PANOLENS.Infospot(600, icon);
             _infospot.position.set( -a.x, a.y, a.z );
             let { x, y, z} = _infospot.position;
             viewer.panorama.add(_infospot);
-            $('#list-link-tbl tbody').append(`
-              <tr data-xyz="${x +'_'+ y + '_' + z}">
-                <td>
-                  <select class="form-control" name="tujuan[]">
-                  ${arr.map((item, index) => (
-                    `<option value="${item.id}">${item.judul}</option>`
-                  ))}
-                  </select>
-                  <input type="hidden" name="x[]" value="${x}"/>
-                  <input type="hidden" name="y[]" value="${y}"/>
-                  <input type="hidden" name="z[]" value="${z}"/>
-                </td>
-              </tr>
-            `);
+            if(target == '#infospot'){
+              $('#list-link-tbl-infospot tbody').append(`
+                <tr data-xyz="${x +'_'+ y + '_' + z}">
+                  <td>
+                    <div class="form-group">
+                      <label for="judul">Judul</label>
+                      <input type="text" class="form-control" id="judul" aria-describedby="title" name="ijudul[]">
+                    </div>
+                    <div class="form-group">
+                      <label for="keterangan">Keterangan</label>
+                      <textarea class="form-control" id="keterangan" aria-describedby="description" name="iketerangan[]"></textarea>
+                    </div>
+                    <div class="from-group">
+                      <label for="customFile">Foto</label>
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="customFile" name="ifoto[]" accept="jpeg,jpg,png"/>
+                        <label class="custom-file-label" for="customFile">Choose file</label>
+                      </div>
+                    </div>
+                    <input type="hidden" name="ix[]" value="${x}"/>
+                    <input type="hidden" name="iy[]" value="${y}"/>
+                    <input type="hidden" name="iz[]" value="${z}"/>
+                  </td>
+                </tr>
+              `)
+            }else{
+              $('#list-link-tbl tbody').append(`
+                <tr data-xyz="${x +'_'+ y + '_' + z}">
+                  <td>
+                    <select class="form-control" name="tujuan[]">
+                    ${arr.map((item, index) => (
+                      `<option value="${item.id}">${item.judul}</option>`
+                    ))}
+                    </select>
+                    <input type="hidden" name="x[]" value="${x}"/>
+                    <input type="hidden" name="y[]" value="${y}"/>
+                    <input type="hidden" name="z[]" value="${z}"/>
+                  </td>
+                </tr>
+              `);
+            }
             viewer.panorama.toggleInfospotVisibility(false, 100);
             _infospot.addEventListener( "click", function(){
               let { x, y, z } = _infospot.position;
               viewer.panorama.remove(_infospot);
-              console.log(x +'_'+ y + '_' + z);
+              // console.log(x +'_'+ y + '_' + z);
+              $(`#list-link-tbl-infospot tbody tr[data-xyz="${x +'_'+ y + '_' + z}"]`).remove();
               $(`#list-link-tbl tbody tr[data-xyz="${x +'_'+ y + '_' + z}"]`).remove();
             } );
           });
