@@ -49,7 +49,7 @@
             <h5 class="card-title">Area Menu</h5>
           </div>
           <hr/>
-          <ul class="list-group mb-3">
+          <ul class="list-group mb-3" style="max-height: calc(100vh - 200px); overflow-x: auto;">
             <li class="list-group-item template" style="cursor: pointer;" data-id="">An item</li>
           </ul>
           <a href="{{ url('') }}" class="btn btn-secondary btn-block">Beranda</a>

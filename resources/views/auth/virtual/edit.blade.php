@@ -123,7 +123,7 @@
                             </div>
                             <div class="form-group">
                               <label for="keterangan">Keterangan</label>
-                              <textarea class="form-control" id="keterangan" aria-describedby="description" name="iketerangan[]" value="{{$virinfo->keterangan}}"></textarea>
+                              <textarea class="form-control" id="keterangan" aria-describedby="description" name="iketerangan[]">{{$virinfo->keterangan}}</textarea>
                             </div>
                             <div class="from-group">
                               <label for="customFile">Foto</label>
